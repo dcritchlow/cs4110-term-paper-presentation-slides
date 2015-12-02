@@ -97,7 +97,7 @@
 				</section>
 				<section>
 					<section>
-						<h2>Symmetric encryption in the past</h2>
+						<h2>Encryption in the past</h2>
 					</section>
 					<section data-background="hieroglyphics-op.png" >
 						<h2>Ancient Egypt</h2>
@@ -108,37 +108,138 @@
 						</p>
 					</section>
 					<section>
-						<h2>Basement Level 2</h2>
-						<p>That's it, time to go back up.</p>
-						<br>
-						<a href="#/2">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
-						</a>
+						<h2>Ancient Greeks</h2>
+						<p>Spartan generals used a Scytale —staff of specific length and diameter around which a thin strip of parchment or leather could be wrapped around, and written on— to communicate with officials at home</p>
+						<img src="scytale-and-war.jpg" width="700" height="300" />
+					</section>
+					<section>
+						<h2>Rome</h2>
+						<p>
+							Julius Caesar used what is known as the Caesar cipher to communicate securely with his troops
+						</p>
+						<img src="caesar-cipher.gif" width="900" height="400" />
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>War Driven Encryption</h2>
+						<p>
+							Enigma machine invented by Artur Scheribus
+						</p>
+						<img src="EnigmaMachineLabeled.jpg" width="400" height="500" alt="" />
+					</section>
+					<section>
+						<h2>How the Enigma works</h2>
+						<img src="enigmawiringdiagram.png" width="900" height="550" alt="" />
+						<aside class="notes">
+							The first stop on the journey is the plugboard. Here the signal is connected to the 'T' input on the plugboard. Some of the letters on the plugboard will be wired up to other letters (the plugs), causing the signal to be diverted. If the 'T' input is not plugged to another letter then our signal will pass straight to the 'T output. In our case, though the 'T' is plugged to the 'K', so the signal is diverted to a new path, the letter is now 'K'. In our example, we are using rotor III in the right-hand position.
+						</aside>
+					</section>
+					<section>
+						<h2>
+							Japanese Purple
+						</h2>
+						<img src="purplecipher.jpg" height="500" />
+						<small>
+							Remnant of the Japanese Purple cipher recovered from their bombed-out embassy in Berlin
+						</small>
+						<aside class="notes">
+							During the war, the Japanese were most efficient in destroying their encryption machines. Currently, not one complete Purple machine has been discovered. The Japanese Purple machine is based on the rotor technology of the Enigma, and the Japanese called it "97-shiki O-bun In-ji-ki", which means Alphabetical Typewriter '97. The 97 means the Japanese year 2597 which is 1937 to the Western world, the year it was developed. The Japanese commonly referred to it as "the machine" or "J", it was the US codebreakers that dubbed it "Purple", after the color of the folders that held the decryptions, to distinguish it from other Japanese ciphers. It used two Underwood typewriters, one for input and one for output. This helped reduce errors and manpower but came at the cost of being more cumbersome on the battlefield. The rotors were electro-mechanically rotated by "stepping switches", rather than by mechanically pressing a key. Also the typewriters were electrical, so the combined cipher system with the power needed would have been much less portable than the Enigma, or especially the M-209. Functionally, it operated like the Enigma with four rotors.
+						</aside>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Modern Encryption</h2>
+					</section>
+					<section>
+						<h2>One Time Pad</h2>
+						<h3>The unbreakable code</h3>
+						<code style="color:#a9a9a9">
+							plaintext   : SECRETMESSAGE <br>
+							one-time pad: CIJTHUUHMLFRU <br>
+							ciphertext  : UMLKLNGLEDFXY
+						</code>
+					</section>
+					<section>
+						<h2>Making the One Time Pad unbreakable</h2>
+						<h3 style="color:#CFB53B">The key</h3>
+							<ul>
+								<li>Must truly be random</li>
+								<li>At least as long as the plaintext</li>
+								<li>Never reused in whole or part</li>
+								<li>Kept completely secret</li>
+							</ul>
+					</section>
+					<section>
+						<h2>Brute Force One Time Pad</h2>
+						<small>
+							Even when trying every possible key, one would still have to review each attempt at decipherment to see if the proper key was used. Without knowing the one time pad all possible plain texts are equally likely decryptions
+						</small>
+						<img src="brute_force_one_time.png" />
+					</section>
+					<section>
+						<h2>Leaving Symmetry Behind</h2>
+						<img src="Symmetry.png" alt="" />
+					</section>
+					<section>
+						<h2>Public / Private Keypairs</h2>
+						<img src="keypairs.png" alt="" />
+					</section>
+					<section>
+						<h2>Diffie-Hellman</h2>
+						<ul>
+							<li>I pick two prime numbers–g,p– and share with you</li>
+							<li>You pick a secret number(a) you don't tell anyone. Compute g^a mod p and give me the result(A)</li>
+							<li>I will do the same and call my secret(b) g^b mod p and give you the result(B)</li>
+							<li>Decryption involves B^a mod p and A^b mod p giving us the same result which is our secret key</li>
+						</ul>
+					</section>
+					<section data-background="#dddddd">
+						<img src="diffie-hellman.png" alt="" />
+					</section>
+					<section>
+						<h2>Disadvantage of Diffie-Hellman</h2>
+						<ul>
+							<li>You cannot send a message. The number sent is simply the result of computation.</li>
+							<li>Man in the middle attack</li>
+						</ul>
+						<img src="man_in_the_middle.png" height="400" />
+					</section>
+					<section>
+						<h2>Enter RSA</h2>
+						<p>
+							Ron <span style="color:red">R</span>ivest, Adi <span style="color:orange">S</span>hamir, and Leonard <span style="color:yellow">A</span>dleman
+							<ul>
+								<li>Sender encrypts with the recipients public key</li>
+								<li>Recipient uses their secret private key to reveal plaintext</li>
+								<li>Prime factorization of large numbers takes a long time</li>
+							</ul>
+						</p>
+					</section>
+					<section>
+						<img src="rsa.jpg" width="1000"/>
 					</section>
 				</section>
 
 				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slides.com" target="_blank">http://slides.com</a>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
-				</section>
-
-				<section>
-					<h2>Touch Optimized</h2>
-					<p>
-						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
-					</p>
+					<section>
+						<h2>Future of Encryption</h2>
+						<p>
+							Current encryption methods rely on complex mathematical problems—integer factorization and discrete logarithm problem
+						</p>
+					</section>
+					<section>
+						<h2>Current computers are very slow at solving these problems</h2>
+						<img src="slow_computer.gif" width="600" />
+					</section>
+					<section>
+						<h2>Quantum Computers</h2>
+						<img src="quantum.jpg" />
+						<aside class="notes">
+							Seth Lloyd from MIT by a quantum computer
+						</aside>
+					</section>
 				</section>
 
 				<section data-markdown>
