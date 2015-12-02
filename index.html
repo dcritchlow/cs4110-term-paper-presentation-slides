@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/theme/solarized.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -88,11 +88,26 @@
 						<h2>Symmetric</h2>
 					</section>
 					<section data-background="symmetricalgo.gif" data-background-size="900px">
+						<aside class="notes">
+							Symmetric encryption is the oldest and best-known technique. A secret key, which can be a number, a word, or just a string of random letters, is applied to the text of a message to change the content in a particular way. This might be as simple as shifting each letter by a number of places in the alphabet. As long as both sender and recipient know the secret key, they can encrypt and decrypt all messages that use this key.
+						</aside>
 					</section>
 					<section>
 						<h2>Asymmetric</h2>
 					</section>
 					<section data-background="asymmetric-encryption.gif" data-background-size="1000px">
+					<aside class="notes">
+						The problem with secret keys is exchanging them over the Internet or a large network while preventing them from falling into the wrong hands. Anyone who knows the secret key can decrypt the message. One answer is asymmetric encryption, in which there are two related keys--a key pair. A public key is made freely available to anyone who might want to send you a message. A second, private key is kept secret, so that only you know it.
+
+Any message (text, binary files, or documents) that are encrypted by using the public key can only be decrypted by applying the same algorithm, but by using the matching private key. Any message that is encrypted by using the private key can only be decrypted by using the matching public key.
+
+This means that you do not have to worry about passing public keys over the Internet (the keys are supposed to be public). A problem with asymmetric encryption, however, is that it is slower than symmetric encryption. It requires far more processing power to both encrypt and decrypt the content of the message.
+About Digital Certificates
+
+To use asymmetric encryption, there must be a way for people to discover other public keys. The typical technique is to use digital certificates (also known simply as certificates). A certificate is a package of information that identifies a user or a server, and contains information such as the organization name, the organization that issued the certificate, the user's e-mail address and country, and the user's public key.
+
+When a server and client require a secure encrypted communication, they send a query over the network to the other party, which sends back a copy of the certificate. The other party's public key can be extracted from the certificate. A certificate can also be used to uniquely identify the holder.
+					</aside>
 					</section>
 				</section>
 				<section>
@@ -101,16 +116,19 @@
 					</section>
 					<section data-background="hieroglyphics-op.png" >
 						<h2>Ancient Egypt</h2>
-						<p><strong>Disordered hieroglyphics were a very simple encryption method using simple substitution</strong></p>
+						<p style="color:black"><strong>Disordered hieroglyphics were a very simple encryption method using simple substitution</strong></p>
 						<br>
-						<p>
-							Each picture in this case would be substituted with another resulting in an encoded message or <i style="color:red">ciphertext</i>
+						<p style="color:black">
+							<strong>Each picture in this case would be substituted with another resulting in an encoded message or <i style="color:red">ciphertext</i></strong>
 						</p>
 					</section>
 					<section>
 						<h2>Ancient Greeks</h2>
-						<p>Spartan generals used a Scytale —staff of specific length and diameter around which a thin strip of parchment or leather could be wrapped around, and written on— to communicate with officials at home</p>
+						<p>Scytale</p>
 						<img src="scytale-and-war.jpg" width="700" height="300" />
+						<aside class="notes">
+							Spartan generals used a Scytale —staff of specific length and diameter around which a thin strip of parchment or leather could be wrapped around, and written on— to communicate with officials at home
+						</aside>
 					</section>
 					<section>
 						<h2>Rome</h2>
@@ -118,11 +136,14 @@
 							Julius Caesar used what is known as the Caesar cipher to communicate securely with his troops
 						</p>
 						<img src="caesar-cipher.gif" width="900" height="400" />
+						<aside class="notes">
+							The Caesar cipher is one of the earliest known and simplest ciphers. It is a type of substitution cipher in which each letter in the plaintext is 'shifted' a certain number of places down the alphabet. In this case the shift is 3
+						</aside>
 					</section>
 				</section>
 				<section>
 					<section>
-						<h2>War Driven Encryption</h2>
+						<h2>Encryption in War</h2>
 						<p>
 							Enigma machine invented by Artur Scheribus
 						</p>
@@ -160,6 +181,13 @@
 							one-time pad: CIJTHUUHMLFRU <br>
 							ciphertext  : UMLKLNGLEDFXY
 						</code>
+						<aside class="notes">
+							The one-time pad is a long sequence of random letters. These letters are combined with the plaintext message to produce the ciphertext. To decipher the message, a person must have a copy of the one-time pad to reverse the process. A one-time pad should be used only once (hence the name) and then destroyed. This is the first and only encryption algorithm that has been proven to be unbreakable.
+
+To encipher a message, you take the first letter in the plaintext message and add it to the first random letter from the one-time pad. For example, suppose you are enciphering the letter S (the 19th letter of the alphabet) and the one-time pad gives you C (3rd letter of the alphabet). You add the two letters and subtract 1. When you add S and C and subtract 1, you get 21 which is U. Each letter is enciphered in this method, with the alphabet wrapping around to the begining if the addition results in a number beyond 26 (Z).
+
+To decipher a message, you take the first letter of the ciphertext and subtract the first random letter from the one-time pad. If the number is negative you wrap around to the end of the alphabet.
+						</aside>
 					</section>
 					<section>
 						<h2>Making the One Time Pad unbreakable</h2>
@@ -173,10 +201,10 @@
 					</section>
 					<section>
 						<h2>Brute Force One Time Pad</h2>
-						<small>
-							Even when trying every possible key, one would still have to review each attempt at decipherment to see if the proper key was used. Without knowing the one time pad all possible plain texts are equally likely decryptions
-						</small>
 						<img src="brute_force_one_time.png" />
+						<aside class="notes">
+							Even when trying every possible key, one would still have to review each attempt at decipherment to see if the proper key was used. Without knowing the one time pad all possible plain texts are equally likely decryptions
+						</aside>
 					</section>
 					<section>
 						<h2>Leaving Symmetry Behind</h2>
@@ -189,27 +217,50 @@
 					<section>
 						<h2>Diffie-Hellman</h2>
 						<ul>
-							<li>I pick two prime numbers–g,p– and share with you</li>
-							<li>You pick a secret number(a) you don't tell anyone. Compute g^a mod p and give me the result(A)</li>
-							<li>I will do the same and call my secret(b) g^b mod p and give you the result(B)</li>
-							<li>Decryption involves B^a mod p and A^b mod p giving us the same result which is our secret key</li>
+							<li>Alice and Bob agree to use a modulus p = 23 and base g = 5 (which is a primitive root modulo 23).</li>
+							<li>Alice chooses a secret integer a = 6, then sends Bob A = g^a mod p. A = 5^6 mod 23 = 8</li>
+							<li>Bob chooses a secret integer b = 15, then sends Alice B = g^b mod p. B = 5^15 mod 23 = 19</li>
+							<li>Alice computes s = B^a mod p. s = 19^6 mod 23 = 2</li>
+							<li>Bob computes s = A^b mod p. s = 8^15 mod 23 = 2</li>
+							<li>Alice and Bob now share a secret (the number 2).</li>
 						</ul>
+						<aside class="notes">
+							In the Diffie-Hellman key exchange Alice and Bob agree to use a modulus p=23 and base g=5. Alice chooses a secret integer a=6, then sends Bob A which equals 8 in this case. Bob chooses a secret integer b=15 then sends Alice B which equals 19 in this case. Alice computes the secret using B from Bob and her secret which = 2 and Bob does the same. Alice and Bob now share a secret, the number 2
+						</aside>
 					</section>
 					<section data-background="#dddddd">
 						<img src="diffie-hellman.png" alt="" />
+						<aside class="notes">
+							This is a visual explanation of what was on the previous slide
+						</aside>
+					</section>
+					<section>
+						<h2>Diffie-Hellman usage</h2>
+						<ul>
+							<li>Secure Sockets Layer (SSL)</li>
+							<li>Secure Shell (SSH)</li>
+							<li>IP Security (IPSec)</li>
+						</ul>
+						<aside class="notes">
+							The Diffie-Hellman protocol has been applied to many security protocols including the Security Sockets Layer
+(SSL), secure shell (SSH), and Internet Protocol Security (IP Sec).
+						</aside>
 					</section>
 					<section>
 						<h2>Disadvantage of Diffie-Hellman</h2>
 						<ul>
-							<li>You cannot send a message. The number sent is simply the result of computation.</li>
+							<li>You cannot send a message in the transition simply the result of the computation.</li>
 							<li>Man in the middle attack</li>
 						</ul>
 						<img src="man_in_the_middle.png" height="400" />
+						<aside class="notes">
+							The Diffie-Hellman key exchange is vulnerable to a man-in-the-middle attack. In this attack, an attacker intercepts Alice's public value and sends their own public value to Bob. When Bob transmits his public value, the attacker substitutes it with their own and sends it to Alice. The attacker and Alice thus agree on one shared key and the attacker and Bob agree on another shared key. After this exchange, the attacker simply decrypts any messages sent out by Alice or Bob, and then reads and possibly modifies them before re-encrypting with the appropriate key and transmitting them to the other party. This vulnerability is present because Diffie-Hellman key exchange does not authenticate the participants. Possible solutions include the use of digital signatures and other protocol variants.
+						</aside>
 					</section>
 					<section>
 						<h2>Enter RSA</h2>
 						<p>
-							Ron <span style="color:red">R</span>ivest, Adi <span style="color:orange">S</span>hamir, and Leonard <span style="color:yellow">A</span>dleman
+							Ron <span style="color:red">R</span>ivest, Adi <span style="color:orange">S</span>hamir, and Leonard <span style="color:blue">A</span>dleman
 							<ul>
 								<li>Sender encrypts with the recipients public key</li>
 								<li>Recipient uses their secret private key to reveal plaintext</li>
@@ -220,13 +271,50 @@
 					<section>
 						<img src="rsa.jpg" width="1000"/>
 					</section>
+					<section>
+						<img src="rsa_explained.jpg"/>
+						<aside class="notes">
+							The First step of RSA encryption is to generate two primes, p and q. The product of our primes in this case is 77. The euler totient is 60. Now we have to choose an exponent, e that is relatively prime to our euler totient. in this case we choose 17. Our next step is to calculate a value for d. d must be chosen so that it is the inverse of e, modulo n. So for this example d equals 53 and is our private key used to decrypt our messages. Our public key is (e,n)-17,77 and our private key is (d,n)-53,60.
+						</aside>
+					</section>
+					<section>
+						<h2>Elliptic Curve Cryptography</h2>
+						<img src="elliptic-curve-crypt-image02.gif" alt="" />
+						<aside class="notes">
+							Let's imagine this curve as the setting for a bizarre game of billiards. Take any two points on the curve and draw a line through them; the line will intersect the curve at exactly one more place. In this game of billiards, you take a ball at point A and shoot it toward point B. When it hits the curve, the ball bounces either straight up (if it's below the x-axis) or straight down (if it's above the x-axis) to the other side of the curve.
+							We can call this billiards move on two points "dot." Any two points on a curve can be dotted together to get a new point.
+
+A dot B = C
+
+We can also string moves together to "dot" a point with itself over and over.
+
+A dot A = B
+
+A dot B = C
+
+A dot C = D
+						</aside>
+					</section>
+					<section>
+						<h2>More realistic Elliptic Curve</h2>
+						<img src="elliptic-curve-crypt-image04-640x476.png" alt="" />
+					</section>
+					<section>
+						<h2>This is the same Curve with only whole number points represented</h2>
+						<img src="elliptic-curve-crypt-image01.gif" width="600"/>
+						<aside class="notes">
+							This hardly looks like a curve in the traditional sense, but it is. It's like the original curve was wrapped around at the edges and only the parts of the curve that hit whole number coordinates are colored in. You can even still see the horizontal symmetry.
+
+In fact, you can still play the billiards game on this curve and dot points together. The equation for a line on the curve still has the same properties. Moreover, the dot operation can be efficiently computed. You can visualize the line between two points as a line that wraps around at the borders until it hits a point. It's like, in our bizarro billiards game, when a ball hits the edge of the board (the max) and then is magically transported to the opposite side of the table and continues on its path until reaching a point, kind of like the game Snake.
+						</aside>
+					</section>
 				</section>
 
 				<section>
 					<section>
 						<h2>Future of Encryption</h2>
 						<p>
-							Current encryption methods rely on complex mathematical problems—integer factorization and discrete logarithm problem
+							Current encryption methods rely on complex mathematical problems—integer factorization, discrete logarithm problem and elliptic curves
 						</p>
 					</section>
 					<section>
@@ -240,277 +328,56 @@
 							Seth Lloyd from MIT by a quantum computer
 						</aside>
 					</section>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						Write content using inline or external Markdown.
-						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  Write content using inline or external Markdown.
-						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
-				</section>
-
-				<section>
-					<section id="fragments">
-						<h2>Fragments</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
-
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
+					<section>
+						<h2>Can Quantum Computers Break Me?</h2>
+						<img src="CryptographyChart-1.png" height="500"/>
 					</section>
 					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's different types of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment current-visible">current-visible</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
+						<h2>Quantum computers explained</h2>
+					</section>
+					<section data-background-video="Quantum computing explained in less than two minutes.mp4">
+
 					</section>
 				</section>
 
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=slide#/transitions">Slide</a> -
-						<a href="?transition=convex#/transitions">Convex</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						reveal.js comes with a few themes built in: <br>
-						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/blood.css'); return false;">Blood</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
-					</p>
-				</section>
-
 				<section>
-					<section data-background="#dddddd">
-						<h2>Slide Backgrounds</h2>
+					<h2>References</h2>
+					<small>
+						<p>“The History Of The Secret Communication.” Secret Communication: Scytale to Encryption. Web. 2 Dec. 2015. <a href="http://www.bekkahwalker.net/101m/projects/final_websites_14/wang_site/history.html">http://www.bekkahwalker.net/101m/projects/final_websites_14/wang_site/history.html</a></p>
+					</small>
+					<small>
 						<p>
-							Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
+							“Cipher Machines.” Cipher Machines. Web. 2 Dec. 2015. <a href="http://ciphermachines.com/purple">http://ciphermachines.com/purple</a>
 						</p>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
-						<h2>Image Backgrounds</h2>
-						<pre><code class="hljs">&lt;section data-background="image.png"&gt;</code></pre>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
-						<h2>Tiled Backgrounds</h2>
-						<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
-					</section>
-					<section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-color="#000000">
-						<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-							<h2>Video Backgrounds</h2>
-							<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
-						</div>
-					</section>
-					<section data-background="http://i.giphy.com/90F8aUepslB84.gif">
-						<h2>... and GIFs!</h2>
-					</section>
+					</small>
+					<small>
+						<p>
+							“How Enigma Machines Work.” How Enigma Machines Work. Web. 2 Dec. 2015. <a href="http://enigma.louisedade.co.uk/howitworks.html">http://enigma.louisedade.co.uk/howitworks.html</a>
+						</p>
+					</small>
+					<small>
+						<p>
+							“Braingle: One-Time Pad Cipher.” Braingle: One-time Pad Cipher. Web. 2 Dec. 2015. <a href="http://www.braingle.com/brainteasers/codes/onetimepad.php">http://www.braingle.com/brainteasers/codes/onetimepad.php</a>
+						</p>
+					</small>
 				</section>
-
-				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						Different background transitions are available via the backgroundTransition option. This one's called "zoom".
-					</p>
-					<pre><code class="hljs">Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
-				</section>
-
-				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						You can override background transitions per-slide.
-					</p>
-					<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
-				</section>
-
 				<section>
-					<h2>Pretty Code</h2>
-					<pre><code class="hljs" data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
-					</code></pre>
-					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
+					<small>
+						<p>07.21.11, Posted. “A Quantum Leap In Computing.” PBS. PBS, n.d. Web. 2 Dec. 2015. <a href="http://www.pbs.org/wgbh/nova/tech/quantum-computing.html">http://www.pbs.org/wgbh/nova/tech/quantum-computing.html</a></p>
+					</small>
+					<small>
+						<p>“International Journal Of Engineering Science and Innovative Technology (IJESIT).” International Journal of Engineering Science and Innovative Technology (IJESIT). Web. 2 Dec. 2015. <a href="http://www.ijesit.com/Volume%201/Issue%202/IJESIT201211_12.pdf">http://www.ijesit.com/Volume%201/Issue%202/IJESIT201211_12.pdf</a></p>
+					</small>
+					<small>
+						<p>Staff, Ars. “A (Relatively Easy to Understand) Primer on Elliptic Curve Cryptography.” Web. 2 Dec. 2015 <a href="http://arstechnica.com/security/2013/10/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography">http://arstechnica.com/security/2013/10/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography</a></p>
+					</small>
 				</section>
 
+				<!--
+					The End
+				-->
 				<section>
-					<h2>Marvelous List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
-				</section>
-
-				<section>
-					<h2>Tabular Tables</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Item</th>
-								<th>Value</th>
-								<th>Quantity</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Apples</td>
-								<td>$1</td>
-								<td>7</td>
-							</tr>
-							<tr>
-								<td>Lemonade</td>
-								<td>$2</td>
-								<td>18</td>
-							</tr>
-							<tr>
-								<td>Bread</td>
-								<td>$3</td>
-								<td>2</td>
-							</tr>
-						</tbody>
-					</table>
-				</section>
-
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Speaker View</h2>
-					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
-					<p>Press the <em>S</em> key to try it out.</p>
-
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
-
-				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
-					<iframe src="https://www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-				</section>
-
-				<section>
-					<h2>Global State</h2>
-					<p>
-						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-						will be added as a class to the document element when the slide is open. This lets you
-						apply broader style changes, like switching the page background.
-					</p>
-				</section>
-
-				<section data-state="customevent">
-					<h2>State Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
-					</p>
-				</section>
-
-				<section>
-					<h2>Much more</h2>
-					<ul>
-						<li>Right-to-left support</li>
-						<li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#auto-sliding">Auto-progression</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#parallax-background">Parallax backgrounds</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#keyboard-bindings">Custom keyboard bindings</a></li>
-					</ul>
-				</section>
-
-				<section style="text-align: left;">
-					<h1>THE END</h1>
-					<p>
-						- <a href="http://slides.com">Try the online editor</a> <br>
-						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
-					</p>
+					<h1>The End</h1>
 				</section>
 
 			</div>
